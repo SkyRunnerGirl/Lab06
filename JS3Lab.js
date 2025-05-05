@@ -42,7 +42,12 @@ let alphabetString = 'abcdefghijklmnopqrstuvwxyz';
 
 console.log(Array.from(alphabetString));
 
+/* Instructor solutions from walkthrough video - alternate solutions but created same output as mine above:
+       1) console.log(alphabetString.split(""));
 
+       2) let abc = alphabetString.split("");
+          console.log(abc);
+*/
 
 
 // Question 2: alphabetArray
@@ -60,10 +65,14 @@ let alphabetArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
  * ↓ YOUR CODE HERE ↓ */
 
 console.log(alphabetArray.reverse());
-console.log(alphabetArray.toString())
 
+console.log(alphabetArray.toString());
+/* Instructor solution from walkthrough video for step 2 - alternate solutions but created same output as mine above:
+       1) console.log(alphabetArray.join(""));
 
-
+       Can do two things at once and do both reverse and join in same step:
+       2) console.log(alphabetArray.reverse().join(""));
+*/
 
 // Question 3: array1
 console.log(`--------------------------
@@ -83,14 +92,18 @@ let array1 = [1, 5, 6, 9, 10, 14];
  * 
  * ↓ YOUR CODE HERE ↓ */
 
-console.log(array1);
-console.log(array1[2]);
-console.log(array1[array1.length -1]);
-array1.push(16, 3);
-console.log(array1);
-console.log(array1[2]);
-console.log(array1[array1.length -1]);
+console.log("Step 1: ", array1);
 
+console.log("Step 2: ", array1[2]);
+
+console.log("Step 3: ", array1[array1.length-1]);
+
+array1.push(16, 3);
+console.log("Step 4: ", array1);
+
+console.log("Step 5: ", array1[2]);
+
+console.log("Step 6: ", array1[array1.length -1]);
 
 
 
@@ -110,17 +123,22 @@ Question 4: Todo List \n`);
  * ↓ YOUR CODE HERE ↓ */
 
 let myTodoList = [];
+
 myTodoList.push("Finish Lab", "Complete Open Class", "Take Quiz");
-console.log(myTodoList);
+console.log("Step 2: ", myTodoList);
+
 myTodoList.splice(1,1);
-console.log(myTodoList);
+console.log("Step 3: ", myTodoList);
 
 let yourTodoList = ["Study Korean", "Pack for Ragnar"];
-console.log(yourTodoList);
+console.log("Step 4: ", yourTodoList);
 
 let ourTodoList = myTodoList.concat(yourTodoList);
-console.log(ourTodoList);
-
+console.log("Step 5: ", ourTodoList);
+/* Using Spread instead of concat
+       let ourTodoList = [...myTodoList, ...yourTodoList];
+       console.log("Step 5: ", ourTodoList);
+*/
 
 
 // Question 5: isEven 
@@ -142,6 +160,15 @@ function isEven(x) {
        return x % 2 === 0;
 }
 
+/* Instructor solution from walkthrough video using if statement:
+       function isEven(x) {
+          if (x % 2 === 0){
+             return true;
+          } else {
+             return false; 
+          }
+       }
+*/
 
 
 /* ↑ YOUR CODE HERE ↑ */
@@ -174,7 +201,7 @@ function addingMachine(x) {
        for (let i = 0; i < x.length; i++) {
               sum += x[i];
        }
-       return sum;
+       return sum; //this must be outside the for loop so the total is printed and not every single loop
 }
 
 
@@ -212,16 +239,12 @@ function reverse(x) {
        if (typeof x === "boolean") {
               return !x;
        } else if (typeof x === "number") {
-              function reverseNumber(x) {
-                     let numString = x.toString();
-                     let reversedString = numString.split("").reverse().join("");
-                     let reversedNum = parseInt(reversedString);
-                     return reversedNum;
-              }
+              return x.toString().split("").reverse().join(""); 
+              //can't reverse a number but can reverse a string = change to string, split elements, reverse elements, rejoin elements with commas by use of ""
        } else if (typeof x === "string") {
               return x.split("").reverse().join("");
-       } else if (typeof x === "object") {
-              return x.slice().reverse();
+       } else if (Array.isArray(x)) { //can't/shouldn't use typeof because no way to specify array, only object
+              return x.reverse(); //don't need .split() before .reverse because all we need to do is reverse the array
        } else {
               return "false";
        }
@@ -260,8 +283,9 @@ Question 8: removeElements \n`);
 
 function removeElements (array) {
        while (array.length > 0) {
-              let i = array.pop();
-       } console.log(array);
+              array.pop(); // don't need a 'let i = ' element, just tell it to do something
+       } 
+       return array; // use return instead of console.log to eliminate the undefined log
 }
 
 
